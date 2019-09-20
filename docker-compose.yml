@@ -1,0 +1,31 @@
+version: '3'
+services:
+  lobsters:
+    container_name: lobsters
+    build: 
+      context: ./lobsters
+      dockerfile: ../Dockerfile
+    volumes:
+      # - app-sync:/app:nocopy
+      - ./lobsters:/app
+      - ./database.yml:/app/config/database.yml
+    ports:
+      - 0.0.0.0:3000:3000
+    entrypoint: 
+      - bundle
+      - exec
+    command:
+      - rails
+      - server
+      - "-b"
+      - "0.0.0.0"
+
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+
+volumes:
+  app-sync:
+    external: true
