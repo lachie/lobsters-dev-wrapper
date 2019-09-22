@@ -8,4 +8,4 @@ shell:
 	docker-compose exec lobsters bash
 
 mysql:
-	docker-compose exec mysql mysql -p
+	docker-compose exec db mysql -ppassword lobsters_dev
